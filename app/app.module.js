@@ -12,24 +12,30 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var app_component_1 = require('./app.component');
+var heroes_component_1 = require('./heroes.component');
 var hero_detail_component_1 = require('./hero-detail.component');
+var hero_service_1 = require('./hero.service');
 // looks like when you pass in modules and components into the NgModule
 // the rest of the app will have access to it
-// questions to ask: are AppModule and AppComponent reserved words
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         core_1.NgModule({
+            // like react native, you have to import in things
+            // browsermodule is to specify the environment
             imports: [
                 platform_browser_1.BrowserModule,
                 forms_1.FormsModule
             ],
+            // you put all your components in here
             declarations: [
                 app_component_1.AppComponent,
+                heroes_component_1.HeroesComponent,
                 hero_detail_component_1.HeroDetailComponent
             ],
-            bootstrap: [app_component_1.AppComponent]
+            bootstrap: [app_component_1.AppComponent],
+            providers: [hero_service_1.HeroService]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
