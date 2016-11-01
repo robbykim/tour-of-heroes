@@ -1,10 +1,5 @@
 import { Component } from '@angular/core';
-
-// class or constructor for the hero
-export class Hero {
-  id: number;
-  name: string;
-}
+import { Hero } from './hero';
 
 // Hero[] notates an array containing only things with the Hero class
 const HEROES: Hero[] = [
@@ -35,21 +30,13 @@ const HEROES: Hero[] = [
       <!-- pretty much the same as 'for hero (variable) in heroes (array)' -->
       <!-- structure similar to rails' <% heroes.each do |hero| %> -->
       <li
-        *ngFor="let hero of heroes" 
+        *ngFor="let hero of heroes"
         [class.selected]="hero === selectedHero"
         (click)="onSelect(hero)"
       >
         <span class="badge">{{hero.id}}</span> {{hero.name}}
       </li>
     </ul>
-    <div *ngIf="selectedHero">
-      <h2>{{selectedHero.name}} details!</h2>
-      <div><label>id: </label>{{selectedHero.id}}</div>
-      <div>
-        <label>name: </label>
-        <input [(ngModel)]="selectedHero.name" placeholder="name"/>
-      </div>
-    </div>
   `,
   styles: [`
     .selected {
