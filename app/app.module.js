@@ -15,6 +15,7 @@ var router_1 = require('@angular/router');
 var app_component_1 = require('./app.component');
 var heroes_component_1 = require('./heroes.component');
 var hero_detail_component_1 = require('./hero-detail.component');
+var dashboard_component_1 = require('./dashboard.component');
 var hero_service_1 = require('./hero.service');
 // looks like when you pass in modules and components into the NgModule
 // the rest of the app will have access to it
@@ -30,17 +31,27 @@ var AppModule = (function () {
                 forms_1.FormsModule,
                 router_1.RouterModule.forRoot([
                     {
+                        path: '',
+                        redirectTo: '/dashboard',
+                        pathMatch: 'full'
+                    },
+                    {
+                        path: 'dashboard',
+                        component: dashboard_component_1.DashboardComponent
+                    },
+                    {
                         // path /heroes opens HeroesComponent
                         path: 'heroes',
                         component: heroes_component_1.HeroesComponent
-                    }
+                    },
                 ]),
             ],
             // you put all your components in here
             declarations: [
                 app_component_1.AppComponent,
                 heroes_component_1.HeroesComponent,
-                hero_detail_component_1.HeroDetailComponent
+                hero_detail_component_1.HeroDetailComponent,
+                dashboard_component_1.DashboardComponent,
             ],
             bootstrap: [app_component_1.AppComponent],
             providers: [hero_service_1.HeroService]

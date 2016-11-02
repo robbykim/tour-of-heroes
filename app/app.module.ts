@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes.component';
 import { HeroDetailComponent } from './hero-detail.component';
+import { DashboardComponent } from './dashboard.component';
 import { HeroService } from './hero.service';
 
 // looks like when you pass in modules and components into the NgModule
@@ -18,17 +19,27 @@ import { HeroService } from './hero.service';
     FormsModule,
     RouterModule.forRoot([
       {
+        path: '',
+        redirectTo: '/dashboard',
+        pathMatch: 'full'
+      },
+      {
+        path: 'dashboard',
+        component: DashboardComponent
+      },
+      {
         // path /heroes opens HeroesComponent
         path: 'heroes',
         component: HeroesComponent
-      }
+      },
     ]),
   ],
   // you put all your components in here
   declarations: [
     AppComponent,
     HeroesComponent,
-    HeroDetailComponent
+    HeroDetailComponent,
+    DashboardComponent,
   ],
   bootstrap: [ AppComponent ],
   providers: [ HeroService ]

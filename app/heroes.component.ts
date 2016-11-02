@@ -93,7 +93,7 @@ export class HeroesComponent implements OnInit {
   }
 
   constructor(private heroService: HeroService) {}
-
+  
   getHeroes(): void {
     this.heroService.getHeroes().then(heroes => this.heroes = heroes);
   }
