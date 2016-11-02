@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Hero } from './hero';
 import { HeroService } from './hero.service';
 
@@ -7,75 +8,10 @@ import { HeroService } from './hero.service';
 // 'template is html'
 // 'styles' is component specific css
 @Component({
+  moduleId: module.id,
   selector: 'my-heroes',
-  template: `
-    <!-- {{}} double curlys are to inject JS variables into html -->
-    <h1>{{title}}</h1>
-    <h2>My Heroes</h2>
-    <ul class="heroes">
-      <!-- the * prefix makes the container element <li> the 'master' template -->
-      <!-- pretty much the same as 'for hero (variable) in heroes (array)' -->
-      <!-- structure similar to rails' <% heroes.each do |hero| %> -->
-      <li
-        *ngFor="let hero of heroes"
-        [class.selected]="hero === selectedHero"
-        (click)="onSelect(hero)"
-      >
-        <span class="badge">{{hero.id}}</span> {{hero.name}}
-      </li>
-    </ul>
-
-    <my-hero-detail [hero]="selectedHero"></my-hero-detail>
-  `,
-  styles: [`
-    .selected {
-      background-color: #CFD8DC !important;
-      color: white;
-    }
-    .heroes {
-      margin: 0 0 2em 0;
-      list-style-type: none;
-      padding: 0;
-      width: 15em;
-    }
-    .heroes li {
-      cursor: pointer;
-      position: relative;
-      left: 0;
-      background-color: #EEE;
-      margin: .5em;
-      padding: .3em 0;
-      height: 1.6em;
-      border-radius: 4px;
-    }
-    .heroes li.selected:hover {
-      background-color: #BBD8DC !important;
-      color: white;
-    }
-    .heroes li:hover {
-      color: #607D8B;
-      background-color: #DDD;
-      left: .1em;
-    }
-    .heroes .text {
-      position: relative;
-      top: -3px;
-    }
-    .heroes .badge {
-      display: inline-block;
-      font-size: small;
-      color: white;
-      padding: 0.8em 0.7em 0 0.7em;
-      background-color: #607D8B;
-      line-height: 1em;
-      position: relative;
-      left: -1px;
-      top: -4px;
-      height: 1.8em;
-      margin-right: .8em;
-      border-radius: 4px 0 0 4px;
-    }
-  `]
+  templateUrl: 'heroes.component.html',
+  styleUrls: ['heroes.component.css']
 })
 
 // variable definitions
@@ -88,17 +24,25 @@ export class HeroesComponent implements OnInit {
   // hero: Hero is typing the argument to the Hero class
   // if input is not of the Hero class it will throw an error
   // not sure what void is doing
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-  }
 
-  constructor(private heroService: HeroService) {}
-  
+  constructor(
+    private heroService: HeroService,
+    private router: Router
+  ) {}
+
   getHeroes(): void {
     this.heroService.getHeroes().then(heroes => this.heroes = heroes);
   }
 
   ngOnInit(): void {
     this.getHeroes();
+  }
+
+  onSelect(hero: Hero): void {
+    this.selectedHero = hero;
+  }
+
+  gotoDetail(): void {
+    this.router.navigate(['/detail', this.selectedHero.id]);
   }
 }

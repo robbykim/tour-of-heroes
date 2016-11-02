@@ -1,0 +1,21 @@
+<!-- {{}} double curlys are to inject JS variables into html -->
+<h2>My Heroes</h2>
+<ul class="heroes">
+  <!-- the * prefix makes the container element <li> the 'master' template -->
+  <!-- pretty much the same as 'for hero (variable) in heroes (array)' -->
+  <!-- structure similar to rails' <% heroes.each do |hero| %> -->
+  <li
+    *ngFor="let hero of heroes"
+    [class.selected]="hero === selectedHero"
+    (click)="onSelect(hero)"
+  >
+    <span class="badge">{{hero.id}}</span> {{hero.name}}
+  </li>
+</ul>
+
+<div *ngIf="selectedHero">
+  <h2>
+    {{selectedHero.name | uppercase}} is my hero
+  </h2>
+  <button (click)="gotoDetail()">View Details</button>
+</div>
