@@ -15,7 +15,14 @@ import { HeroService } from './hero.service';
   // browsermodule is to specify the environment
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([
+      {
+        // path /heroes opens HeroesComponent
+        path: 'heroes',
+        component: HeroesComponent
+      }
+    ]),
   ],
   // you put all your components in here
   declarations: [
