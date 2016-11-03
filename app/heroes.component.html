@@ -1,5 +1,11 @@
 <!-- {{}} double curlys are to inject JS variables into html -->
 <h2>My Heroes</h2>
+<div>
+  <label>Hero name:</label> <input #heroName />
+  <button (click)="add(heroName.value); heroName.value=''">
+    Add
+  </button>
+</div>
 <ul class="heroes">
   <!-- the * prefix makes the container element <li> the 'master' template -->
   <!-- pretty much the same as 'for hero (variable) in heroes (array)' -->
